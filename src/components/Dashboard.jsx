@@ -1,0 +1,69 @@
+import { useMemo } from 'react'
+import { useFilters } from '../hooks/useFilters'
+import FilterBar from './FilterBar'
+import PersonalBanner from './PersonalBanner'
+import MetricCards from './MetricCards'
+import { DonutChart, BarStasiun, TrendChart, ParetoChart, HeatmapLokasi, ShiftChart } from './Charts'
+import DataTable from './DataTable'
+import s from './Dashboard.module.css'
+
+export default function Dashboard({ data, filename, onUpload, uploading, lastUpload }) {
+  const { filters, setters, filtered } = useFilters(data)
+  const allNames = useMemo(() => [...new Set(data.map(d => d.nama))].sort(), [data])
+
+  return (
+    <div className={s.page}>
+      {/* Navbar — same vibe as station-rooms */}
+      <nav className={s.nav}>
+        <div className={s.navInner}>
+          <div className={s.navBrand}>
+            <div className={s.navLogo}>
+            <svg viewBox="0 0 36 36" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 28 L12 8 L18 20 L24 8 L32 28" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+            <div>
+              <div className={s.navTitle}>Station Bank Data Dashboard</div>
+              <div className={s.navSub}>MRT Jakarta</div>
+            </div>
+          </div>
+          <div className={s.navRight}>
+            <span className={s.navTag}>Internal Tool · Region 1</span>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero strip */}
+      <div className={s.hero}>
+        <div className={s.heroInner}>
+          <p className={s.heroEyebrow}>Data Operasional Stasiun</p>
+          <h1 className={s.heroTitle}>Banking Data.</h1>
+          <p className={s.heroSub}>Analisis laporan harian dari seluruh Area Authority di 4 stasiun Region 1.</p>
+        </div>
+      </div>
+
+      <div className={s.body}>
+        <FilterBar filters={filters} setters={setters} allNames={allNames} />
+        <PersonalBanner nama={filters.nama} allData={data} />
+        <MetricCards data={filtered} selectedNama={filters.nama} />
+        <div className={s.row2}>
+          <DonutChart data={filtered} />
+          <BarStasiun data={filtered} />
+        </div>
+        <div className={s.row2}>
+          <TrendChart allData={data} selectedNama={filters.nama} />
+          <ParetoChart data={filtered} />
+        </div>
+        <div className={s.row2}>
+          <HeatmapLokasi data={filtered} />
+          <ShiftChart data={filtered} />
+        </div>
+        <DataTable data={filtered} />
+
+        <footer className={s.footer}>
+          © 2026 MRT Jakarta · Internal Tool · Region 1 · Rizky Widodo (intern) · Banking Data Program
+        </footer>
+      </div>
+    </div>
+  )
+}

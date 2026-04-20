@@ -1,0 +1,6 @@
+.grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 12px; }
+.card { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; box-shadow: var(--shadow-sm); }
+.label { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
+.value { font-size: 32px; font-weight: 700; line-height: 1; }
+.sub   { font-size: 12px; color: var(--text-muted); margin-top: 5px; }
+@media (max-width: 640px) { .grid { grid-template-columns: repeat(2,1fr); } }

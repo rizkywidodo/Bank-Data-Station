@@ -1,0 +1,17 @@
+.banner { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 22px; margin-bottom: 12px; display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; box-shadow: var(--shadow-sm); animation: fadeUp 0.2s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+.left   { display: flex; align-items: center; gap: 14px; min-width: 200px; }
+.avatar { width: 44px; height: 44px; border-radius: 10px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0; }
+.name   { font-size: 16px; font-weight: 600; color: var(--text); }
+.meta   { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.stats  { display: flex; gap: 8px; flex-wrap: wrap; }
+.stat   { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 10px 16px; text-align: center; min-width: 70px; }
+.sv { display: block; font-size: 22px; font-weight: 700; line-height: 1; }
+.sl { display: block; font-size: 10px; color: var(--text-faint); margin-top: 3px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+.bars       { flex: 1; min-width: 220px; }
+.barsTitle  { font-size: 11px; font-weight: 600; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; }
+.brow   { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.blabel { font-size: 12px; color: var(--text-muted); width: 60px; flex-shrink: 0; }
+.btrack { flex: 1; background: var(--bg-subtle); border-radius: 4px; height: 8px; overflow: hidden; }
+.bfill  { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+.bval   { font-size: 11px; color: var(--text-muted); width: 32px; text-align: right; flex-shrink: 0; }
