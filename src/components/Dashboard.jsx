@@ -28,8 +28,12 @@ export default function Dashboard({ data, filename, onUpload, uploading, lastUpl
             </div>
           </div>
           <div className={s.navRight}>
-            <span className={s.navTag}>Internal Tool · Region 1</span>
-          </div>
+          <label className={s.uploadBtn}>
+            {uploading ? 'Mengupload...' : 'Upload Data Terbaru'}
+          <input type="file" accept=".xlsx,.xls,.csv" style={{display:'none'}} onChange={onUpload} disabled={uploading} />
+          </label>
+          {lastUpload && <span className={s.navTag}>Update: {lastUpload}</span>}
+        </div>
         </div>
       </nav>
 

@@ -88,9 +88,8 @@ export default function DataTable({ data }) {
   const [selected, setSelected] = useState(null)
 
   const sorted = [...data].sort((a, b) => {
-    const da = new Date(a.tgl), db = new Date(b.tgl)
-    return sortAsc ? da - db : db - da
-  })
+  return sortAsc ? a.id2 - b.id2 : b.id2 - a.id2
+})
 
   const totalPages = Math.ceil(sorted.length / PER_PAGE)
   if (page > totalPages && totalPages > 0) setPage(1)
