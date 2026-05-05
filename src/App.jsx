@@ -9,7 +9,7 @@ const supabase = createClient(
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjeGp1ZmJ6YmxmcW9icGpvYnp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3MDE5MTQsImV4cCI6MjA5MjI3NzkxNH0.iC5msp9WUC96XX6hegEjxzUZmNQKYyv7KMXcuSYi_WY'
 )
 
-const PASSWORD = '@Bandung2026'
+const PASSWORD = import.meta.env.VITE_APP_PASSWORD
 
 const parseRows = (rows) => rows
   .filter(r => r.Name && r.Stasiun)
