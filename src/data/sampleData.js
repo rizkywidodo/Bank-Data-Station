@@ -32,7 +32,7 @@ export const SAMPLE_DATA = [
 ]
 
 export const STASIUN_LIST  = ['Cipete Raya', 'Fatmawati', 'Haji Nawi', 'Lebak Bulus']
-export const BULAN_LIST    = ['Januari', 'Februari', 'Maret', 'April']
+export const BULAN_LIST    = []
 export const SHIFT_LIST = ['Pagi', 'Siang', 'Malam', 'Office Hours']
 export const KATEGORI_LIST = ['Safety', 'Service', 'Security']
 export const COLORS = { Safety: '#4472C4', Service: '#FFC000', Security: '#FF0000' }

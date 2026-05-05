@@ -10,6 +10,12 @@ import s from './Dashboard.module.css'
 export default function Dashboard({ data, filename, onUpload, uploading, lastUpload }) {
   const { filters, setters, filtered } = useFilters(data)
   const allNames = useMemo(() => [...new Set(data.map(d => d.nama))].sort(), [data])
+  const allStasiun  = useMemo(() => [...new Set(data.map(d => d.stasiun))].filter(Boolean).sort(), [data])
+  const allBulan    = useMemo(() => [...new Set(data.map(d => d.bulan))].filter(Boolean), [data])
+  const allShift    = useMemo(() => [...new Set(data.map(d => d.shift))].filter(Boolean).sort(), [data])
+  const allLokasi   = useMemo(() => [...new Set(data.map(d => d.lokasi))].filter(Boolean).sort(), [data])
+  const allSubkat   = useMemo(() => [...new Set(data.map(d => d.subkategori))].filter(Boolean).sort(), [data])
+  const allKategori = useMemo(() => [...new Set(data.map(d => d.kategori))].filter(Boolean).sort(), [data])
 
   return (
     <div className={s.page}>
@@ -47,7 +53,17 @@ export default function Dashboard({ data, filename, onUpload, uploading, lastUpl
       </div>
 
       <div className={s.body}>
-        <FilterBar filters={filters} setters={setters} allNames={allNames} />
+        <FilterBar 
+  filters={filters} 
+  setters={setters} 
+  allNames={allNames}
+  allStasiun={allStasiun}
+  allBulan={allBulan}
+  allShift={allShift}
+  allLokasi={allLokasi}
+  allSubkat={allSubkat}
+  allKategori={allKategori}
+      />
         <PersonalBanner nama={filters.nama} allData={data} />
         <MetricCards data={filtered} selectedNama={filters.nama} />
         <div className={s.row2}>

@@ -1,7 +1,6 @@
-import { BULAN_LIST, STASIUN_LIST, SHIFT_LIST, KATEGORI_LIST, LOKASI_LIST, SUBKAT_LIST } from '../data/sampleData'
 import s from './FilterBar.module.css'
 
-export default function FilterBar({ filters, setters, allNames }) {
+export default function FilterBar({ filters, setters, allNames, allStasiun, allBulan, allShift, allLokasi, allSubkat, allKategori }) {
   const { bulan, stasiun, shift, kategori, nama, lokasi, subkat } = filters
   const { setBulan, setStasiun, setShift, setKategori, setNama, setLokasi, setSubkat } = setters
 
@@ -15,12 +14,12 @@ export default function FilterBar({ filters, setters, allNames }) {
         </span>
         <div className={s.selects}>
           {[
-            { label:'Bulan',        val:bulan,    set:setBulan,    opts:BULAN_LIST    },
-            { label:'Stasiun',      val:stasiun,  set:setStasiun,  opts:STASIUN_LIST  },
-            { label:'Shift',        val:shift,    set:setShift,    opts:SHIFT_LIST    },
-            { label:'Kategori',     val:kategori, set:setKategori, opts:KATEGORI_LIST },
-            { label:'Lokasi',       val:lokasi,   set:setLokasi,   opts:LOKASI_LIST   },
-            { label:'Sub Kategori', val:subkat,   set:setSubkat,   opts:SUBKAT_LIST   },
+            { label:'Bulan',        val:bulan,    set:setBulan,    opts:allBulan    },
+            { label:'Stasiun',      val:stasiun,  set:setStasiun,  opts:allStasiun  },
+            { label:'Shift',        val:shift,    set:setShift,    opts:allShift    },
+            { label:'Kategori',     val:kategori, set:setKategori, opts:allKategori },
+            { label:'Lokasi',       val:lokasi,   set:setLokasi,   opts:allLokasi   },
+            { label:'Sub Kategori', val:subkat,   set:setSubkat,   opts:allSubkat   },
           ].map(({ label, val, set, opts }) => (
             <div key={label} className={s.selectWrap}>
               <select
