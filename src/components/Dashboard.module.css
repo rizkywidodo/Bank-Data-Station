@@ -26,8 +26,22 @@
 
 @media (max-width: 768px) {
   .row2 { grid-template-columns: 1fr; }
-  .body { padding: 16px; }
-  .heroTitle { font-size: 28px; }
+  .body { padding: 12px; }
+  .heroTitle { font-size: 26px; }
+  .hero { padding: 24px 0 28px; }
+  .heroSub { font-size: 13px; }
+  .navInner { padding: 0 16px; height: 52px; }
+  .navTitle { font-size: 13px; }
+  .navSub { display: none; }
+  .navRight { gap: 8px; }
+  .uploadBtn { font-size: 11px; padding: 6px 10px; }
+  .navTag { display: none; }
 }
 .uploadBtn { padding: 7px 14px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: #fff; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
 .uploadBtn:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.5); }
+
+.uploadIcon { display: none; }
+
+@media (max-width: 768px) {
+  .uploadBtn { font-size: 10px; padding: 4px 8px; }
+}

@@ -29,16 +29,16 @@ export default function Dashboard({ data, filename, onUpload, uploading, lastUpl
             </svg>
           </div>
             <div>
-              <div className={s.navTitle}>Station Bank Data Dashboard</div>
+              <div className={s.navTitle}>Station Bank Data</div>
               <div className={s.navSub}>MRT Jakarta</div>
             </div>
           </div>
           <div className={s.navRight}>
           <label className={s.uploadBtn}>
-            {uploading ? 'Mengupload...' : 'Upload Data Terbaru'}
+          <span className={s.uploadText}>{uploading ? 'Mengupload...' : 'Upload Data Terbaru'}</span>
+          <span className={s.uploadIcon}>↑</span>
           <input type="file" accept=".xlsx,.xls,.csv" style={{display:'none'}} onChange={onUpload} disabled={uploading} />
-          </label>
-          {lastUpload && <span className={s.navTag}>Update: {lastUpload}</span>}
+        </label>
         </div>
         </div>
       </nav>
@@ -49,6 +49,7 @@ export default function Dashboard({ data, filename, onUpload, uploading, lastUpl
           <p className={s.heroEyebrow}>Data Operasional Stasiun</p>
           <h1 className={s.heroTitle}>Banking Data.</h1>
           <p className={s.heroSub}>Analisis laporan harian dari seluruh Area Authority di 4 stasiun Region 1.</p>
+          {lastUpload && <p className={s.heroSub} style={{marginTop:6,opacity:0.6,fontSize:13}}>Update terakhir: {lastUpload}</p>}
         </div>
       </div>
 
