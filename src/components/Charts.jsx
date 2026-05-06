@@ -69,12 +69,17 @@ export function BarStasiun({ data }) {
 
 export function TrendChart({ allData, selectedNama }) {
   const base = selectedNama === 'all' ? allData : allData.filter(d => d.nama === selectedNama)
-  const cd   = BULAN_LIST.map(b => ({
-    name:     b.slice(0, 3),
+  
+  const bulanOrder = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember']
+  const bulanAda = bulanOrder.filter(b => base.some(d => d.bulan === b))
+
+  const cd = bulanAda.map(b => ({
+    name: b.slice(0, 3),
     Safety:   base.filter(d => d.bulan === b && d.kategori === 'Safety').length,
     Service:  base.filter(d => d.bulan === b && d.kategori === 'Service').length,
     Security: base.filter(d => d.bulan === b && d.kategori === 'Security').length,
   }))
+
   return (
     <Card title="Trend per Bulan">
       <Leg items={Object.entries(COLORS).map(([k, c]) => ({ label: k, color: c }))} />

@@ -3,6 +3,8 @@ import * as XLSX from 'xlsx'
 import { createClient } from '@supabase/supabase-js'
 import Dashboard from './components/Dashboard'
 import { SAMPLE_DATA } from './data/sampleData'
+import ReportListPage from './components/ReportListPage'
+import ReportPage from './components/ReportPage'
 
 const supabase = createClient(
   'https://jcxjufbzblfqobpjobzw.supabase.co',
@@ -36,18 +38,22 @@ const parseRows = (rows) => rows
   }))
 
 export default function App() {
-  const [auth, setAuth]         = useState(() => sessionStorage.getItem('auth') === 'true')
-  const [pw, setPw]             = useState('')
-  const [wrong, setWrong]       = useState(false)
-  const [data, setData]         = useState(SAMPLE_DATA)
-  const [loading, setLoading]   = useState(true)
+  const [auth, setAuth]           = useState(() => sessionStorage.getItem('auth') === 'true')
+  const [pw, setPw]               = useState('')
+  const [wrong, setWrong]         = useState(false)
+  const [data, setData]           = useState(SAMPLE_DATA)
+  const [loading, setLoading]     = useState(true)
   const [uploading, setUploading] = useState(false)
   const [lastUpload, setLastUpload] = useState(null)
+  const [page, setPage]           = useState('dashboard')
+  const [selectedAA, setSelectedAA] = useState(null)
 
   useEffect(() => {
     if (auth) fetchLatest()
     else setLoading(false)
   }, [auth])
+
+  const navigate = (p, aa = null) => { setPage(p); setSelectedAA(aa); window.scrollTo(0,0) }
 
   function handleLogin(e) {
     e.preventDefault()
@@ -120,19 +126,13 @@ export default function App() {
         <form onSubmit={handleLogin}>
           <div style={{marginBottom:16}}>
             <label style={{fontSize:11,fontWeight:600,color:'#6B7280',textTransform:'uppercase',letterSpacing:'0.07em',display:'block',marginBottom:6}}>Password</label>
-            <input
-              type="password"
-              value={pw}
-              onChange={e => { setPw(e.target.value); setWrong(false) }}
+            <input type="password" value={pw} onChange={e => { setPw(e.target.value); setWrong(false) }}
               placeholder="Masukkan password"
               style={{width:'100%',padding:'10px 14px',borderRadius:8,border:`1px solid ${wrong?'#CC0000':'#E5E7EB'}`,fontSize:14,outline:'none',fontFamily:'Inter,sans-serif'}}
-              autoFocus
-            />
+              autoFocus/>
             {wrong && <div style={{fontSize:12,color:'#CC0000',marginTop:6}}>Password salah, coba lagi.</div>}
           </div>
-          <button type="submit" style={{width:'100%',padding:'10px',borderRadius:8,background:'#0057A8',color:'#fff',border:'none',fontSize:14,fontWeight:600,cursor:'pointer'}}>
-            Masuk
-          </button>
+          <button type="submit" style={{width:'100%',padding:'10px',borderRadius:8,background:'#0057A8',color:'#fff',border:'none',fontSize:14,fontWeight:600,cursor:'pointer'}}>Masuk</button>
         </form>
         <div style={{fontSize:11,color:'#9CA3AF',textAlign:'center',marginTop:20}}>© 2026 MRT Jakarta · Region 1</div>
       </div>
@@ -145,5 +145,7 @@ export default function App() {
     </div>
   )
 
-  return <Dashboard data={data} onUpload={handleUpload} uploading={uploading} lastUpload={lastUpload} />
+  if (page === 'report' && selectedAA) return <ReportPage data={data} nama={selectedAA} onBack={() => navigate('report')} />
+  if (page === 'report') return <ReportListPage data={data} onSelect={(nama) => navigate('report', nama)} onBack={() => navigate('dashboard')} />
+  return <Dashboard data={data} onUpload={handleUpload} uploading={uploading} lastUpload={lastUpload} onNavigate={navigate} />
 }

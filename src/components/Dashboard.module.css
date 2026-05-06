@@ -45,3 +45,6 @@
 @media (max-width: 768px) {
   .uploadBtn { font-size: 10px; padding: 4px 8px; }
 }
+
+.heroBtn { margin-top: 16px; padding: 10px 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.1); color: #fff; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.heroBtn:hover { background: rgba(255,255,255,0.2); }

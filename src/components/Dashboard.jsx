@@ -7,7 +7,7 @@ import { DonutChart, BarStasiun, TrendChart, ParetoChart, HeatmapLokasi, ShiftCh
 import DataTable from './DataTable'
 import s from './Dashboard.module.css'
 
-export default function Dashboard({ data, filename, onUpload, uploading, lastUpload }) {
+export default function Dashboard({ data, filename, onUpload, uploading, lastUpload, onNavigate }) {
   const { filters, setters, filtered } = useFilters(data)
   const allNames = useMemo(() => [...new Set(data.map(d => d.nama))].sort(), [data])
   const allStasiun  = useMemo(() => [...new Set(data.map(d => d.stasiun))].filter(Boolean).sort(), [data])
@@ -50,6 +50,9 @@ export default function Dashboard({ data, filename, onUpload, uploading, lastUpl
           <h1 className={s.heroTitle}>Banking Data.</h1>
           <p className={s.heroSub}>Analisis laporan harian dari seluruh Area Authority di 4 stasiun Region 1.</p>
           {lastUpload && <p className={s.heroSub} style={{marginTop:6,opacity:0.6,fontSize:13}}>Update terakhir: {lastUpload}</p>}
+          <button className={s.heroBtn} onClick={() => onNavigate('report')}>
+            Lihat Laporan AA →
+          </button>
         </div>
       </div>
 

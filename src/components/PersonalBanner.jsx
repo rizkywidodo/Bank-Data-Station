@@ -17,7 +17,7 @@ export default function PersonalBanner({ nama, allData }) {
         <div className={s.avatar}>{initials(nama)}</div>
         <div>
           <div className={s.name}>{nama}</div>
-          <div className={s.meta}>{topSt?.[0]||'—'} · Shift {topShift?.[0]||'—'}</div>
+          <div className={s.meta}>{topSt?.[0]||'—'}</div>
         </div>
       </div>
       <div className={s.stats}>
