@@ -30,11 +30,19 @@ const parseRows = (rows) => rows
     stasiun:      r.Stasiun || '',
     shift:        r.Shift || '',
     kategori:     r['Klasifikasi Laporan'] || '',
-    subkategori:  r['Sub Kategori'] || '',
+    subkategori: (() => {
+    const raw = r['Sub Kategori'] || ''
+    const toGangguan = ['Gangguan Gate & Mesin Tiket','Gangguan Lift & Eskalator','Gangguan Sistem Digital','Kerusakan Fisik']
+    if (toGangguan.includes(raw)) return 'Gangguan'
+    if (raw === 'Saran & Observasi') return 'Kaizen'
+    return raw
+  })(),
     lokasi:       r.Lokasi || '',
     deskripsi:    r['Deskripsi Highlight'] || '',
     tindaklanjut: r['Tindak Lanjut'] || '',
     lampiran:     r.Lampiran || '',
+    jenisGangguan: r['Gangguan Fasilitas'] || '',
+    subkategoriAsli: r['Sub Kategori'] || '',
   }))
 
 export default function App() {

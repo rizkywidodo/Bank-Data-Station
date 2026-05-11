@@ -50,6 +50,13 @@ function Modal({ entry, onClose }) {
               <div className={s.modalText}>{entry.tindaklanjut || '—'}</div>
             </div>
 
+            {(entry.jenisGangguan || ['Gangguan Gate & Mesin Tiket','Gangguan Lift & Eskalator','Gangguan Sistem Digital','Kerusakan Fisik'].includes(entry.subkategoriAsli)) && (
+            <div className={s.modalSection}>
+              <div className={s.modalLabel}>Fasilitas yang Terganggu</div>
+              <div className={s.modalText}>{entry.jenisGangguan || entry.subkategoriAsli}</div>
+            </div>
+          )}
+
             {lampiranList.length > 0 && (
               <div className={s.modalSection}>
                 <div className={s.modalLabel}>Lampiran ({lampiranList.length})</div>
