@@ -1,10 +1,10 @@
 import s from './FilterBar.module.css'
 
-export default function FilterBar({ filters, setters, allNames, allStasiun, allBulan, allShift, allLokasi, allSubkat, allKategori }) {
-  const { bulan, stasiun, shift, kategori, nama, lokasi, subkat } = filters
-  const { setBulan, setStasiun, setShift, setKategori, setNama, setLokasi, setSubkat } = setters
+export default function FilterBar({ filters, setters, allNames, allStasiun, allBulan, allShift, allLokasi, allSubkat, allKategori, allFasilitas }) {
+  const { bulan, stasiun, shift, kategori, nama, lokasi, subkat, fasilitas } = filters
+  const { setBulan, setStasiun, setShift, setKategori, setNama, setLokasi, setSubkat, setFasilitas } = setters
 
-  const activeCount = [bulan, stasiun, shift, kategori, lokasi, subkat].filter(v => v !== 'all').length
+  const activeCount = [bulan, stasiun, shift, kategori, lokasi, subkat, fasilitas].filter(v => v !== 'all').length
 
   return (
     <div className={s.wrap}>
@@ -32,10 +32,24 @@ export default function FilterBar({ filters, setters, allNames, allStasiun, allB
               </select>
             </div>
           ))}
+
+          {subkat === 'Gangguan' && (
+            <div className={s.selectWrap}>
+              <select
+                value={fasilitas}
+                onChange={e => setFasilitas(e.target.value)}
+                className={`${s.select} ${fasilitas !== 'all' ? s.selectActive : ''}`}
+              >
+                <option value="all">Fasilitas</option>
+                {allFasilitas.map(f => <option key={f} value={f}>{f}</option>)}
+              </select>
+            </div>
+          )}
+
           {activeCount > 0 && (
             <button className={s.resetBtn} onClick={() => {
               setBulan('all'); setStasiun('all'); setShift('all')
-              setKategori('all'); setLokasi('all'); setSubkat('all')
+              setKategori('all'); setLokasi('all'); setSubkat('all'); setFasilitas('all')
             }}>Reset</button>
           )}
         </div>

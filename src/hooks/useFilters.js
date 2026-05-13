@@ -8,6 +8,7 @@ export function useFilters(data) {
   const [nama,     setNama]     = useState('all')
   const [lokasi,   setLokasi]   = useState('all')
   const [subkat,   setSubkat]   = useState('all')
+  const [fasilitas, setFasilitas] = useState('all')
 
   const filtered = useMemo(() => data.filter(d =>
     (bulan    === 'all' || d.bulan       === bulan)    &&
@@ -16,12 +17,13 @@ export function useFilters(data) {
     (kategori === 'all' || d.kategori    === kategori) &&
     (nama     === 'all' || d.nama        === nama)     &&
     (lokasi   === 'all' || d.lokasi      === lokasi)   &&
-    (subkat   === 'all' || d.subkategori === subkat)
-  ), [data, bulan, stasiun, shift, kategori, nama, lokasi, subkat])
+    (subkat     === 'all' || d.subkategori  === subkat) &&
+    (fasilitas  === 'all' || d.jenisGangguan === fasilitas || d.subkategoriAsli === fasilitas)
+  ), [data, bulan, stasiun, shift, kategori, nama, lokasi, subkat, fasilitas])
 
   return {
-    filters: { bulan, stasiun, shift, kategori, nama, lokasi, subkat },
-    setters: { setBulan, setStasiun, setShift, setKategori, setNama, setLokasi, setSubkat },
+    filters: { bulan, stasiun, shift, kategori, nama, lokasi, subkat, fasilitas },
+    setters: { setBulan, setStasiun, setShift, setKategori, setNama, setLokasi, setSubkat, setFasilitas },
     filtered,
   }
 }

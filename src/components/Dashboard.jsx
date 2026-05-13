@@ -15,6 +15,9 @@ export default function Dashboard({ data, filename, onUpload, uploading, lastUpl
   const allShift    = useMemo(() => [...new Set(data.map(d => d.shift))].filter(Boolean).sort(), [data])
   const allLokasi   = useMemo(() => [...new Set(data.map(d => d.lokasi))].filter(Boolean).sort(), [data])
   const allSubkat   = useMemo(() => [...new Set(data.map(d => d.subkategori))].filter(Boolean).sort(), [data])
+  const allFasilitas = useMemo(() => [
+  ...new Set(data.flatMap(d => d.jenisGangguan ? [d.jenisGangguan] : d.subkategoriAsli && ['Gangguan Gate & Mesin Tiket','Gangguan Lift & Eskalator','Gangguan Sistem Digital','Kerusakan Fisik'].includes(d.subkategoriAsli) ? [d.subkategoriAsli] : []))
+].filter(Boolean).sort(), [data])
   const allKategori = useMemo(() => [...new Set(data.map(d => d.kategori))].filter(Boolean).sort(), [data])
 
   return (
@@ -67,6 +70,7 @@ export default function Dashboard({ data, filename, onUpload, uploading, lastUpl
   allLokasi={allLokasi}
   allSubkat={allSubkat}
   allKategori={allKategori}
+  allFasilitas={allFasilitas}
       />
         <PersonalBanner nama={filters.nama} allData={data} />
         <MetricCards data={filtered} selectedNama={filters.nama} />

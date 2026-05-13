@@ -45,6 +45,15 @@ function Modal({ entry, onClose }) {
               <div className={s.modalText}>{entry.deskripsi || '—'}</div>
             </div>
 
+            {(entry.jenisGangguan || entry.subkategoriAsli !== entry.subkategori) && (
+              <div className={s.modalSection}>
+                <div className={s.modalLabel}>Fasilitas yang Terganggu</div>
+                <div className={s.modalText}>
+                  {entry.jenisGangguan || entry.subkategoriAsli}
+                </div>
+              </div>
+            )}
+
             <div className={s.modalSection}>
               <div className={s.modalLabel}>Tindak Lanjut</div>
               <div className={s.modalText}>{entry.tindaklanjut || '—'}</div>

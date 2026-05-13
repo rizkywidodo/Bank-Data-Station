@@ -16,34 +16,34 @@ const PASSWORD = '@Bandung2026'
 const parseRows = (rows) => rows
   .filter(r => r.Name && r.Stasiun)
   .map((r, idx) => ({
-    id:  idx + 1,
-    id2: parseInt(r['ID2']) || 0,
-    tgl: (() => {
-      const raw = r['Completion time']
-      if (!raw) return ''
-      const d = new Date(raw)
-      if (isNaN(d)) return raw
-      return d.toLocaleDateString('id-ID', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' })
-    })(),
-    bulan:        r.Bulan || '',
-    nama:         r.Name || '',
-    stasiun:      r.Stasiun || '',
-    shift:        r.Shift || '',
-    kategori:     r['Klasifikasi Laporan'] || '',
-    subkategori: (() => {
+  id:  idx + 1,
+  id2: parseInt(r['ID2']) || 0,
+  tgl: (() => {
+    const raw = r['Completion time']
+    if (!raw) return ''
+    const d = new Date(raw)
+    if (isNaN(d)) return raw
+    return d.toLocaleDateString('id-ID', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' })
+  })(),
+  bulan:           r.Bulan || '',
+  nama:            r.Name || '',
+  stasiun:         r.Stasiun || '',
+  shift:           r.Shift || '',
+  kategori:        r['Klasifikasi Laporan'] || '',
+  subkategoriAsli: r['Sub Kategori'] || '',
+  subkategori: (() => {
     const raw = r['Sub Kategori'] || ''
     const toGangguan = ['Gangguan Gate & Mesin Tiket','Gangguan Lift & Eskalator','Gangguan Sistem Digital','Kerusakan Fisik']
     if (toGangguan.includes(raw)) return 'Gangguan'
     if (raw === 'Saran & Observasi') return 'Kaizen'
     return raw
   })(),
-    lokasi:       r.Lokasi || '',
-    deskripsi:    r['Deskripsi Highlight'] || '',
-    tindaklanjut: r['Tindak Lanjut'] || '',
-    lampiran:     r.Lampiran || '',
-    jenisGangguan: r['Gangguan Fasilitas'] || '',
-    subkategoriAsli: r['Sub Kategori'] || '',
-  }))
+  jenisGangguan:   r['Gangguan Fasilitas'] || '',
+  lokasi:          r.Lokasi || '',
+  deskripsi:       r['Deskripsi Highlight'] || '',
+  tindaklanjut:    r['Tindak Lanjut'] || '',
+  lampiran:        r.Lampiran || '',
+}))
 
 export default function App() {
   const [auth, setAuth]           = useState(() => sessionStorage.getItem('auth') === 'true')
